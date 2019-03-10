@@ -1,0 +1,11 @@
+body{
+    
+background: white;
+    color: black;
+}
+.button{
+font: bold 16px Arial;
+background-color:#EEEEEE;
+padding: 1px;
+border: 1px solid #CCCCCC;
+}
