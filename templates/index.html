@@ -14,11 +14,14 @@
 <h3> RELAY --> {{relay}}</h3>
 <h3> RELAY CNTRL ==><a href = "/relay/on" class = "button">TURN ON</a>
 <a href="/relay/off" class = "button">TURN OFF</a></h3>
+
 <h3>Sterowanie wypelnieniem:</h3>
-  <h3><form method = "POST" action = "getValue"> 
+  <h3><form method = "POST" action = "/getValue"> 
       <input type="range" min="0" max="100" name = "slider" />
-      <input type="submit" value="submit"/>
-  </form></h3>
+      <input type="submit" value="submit" />
+      Aktualna Wartość -->{{submitValue}} 
+  </form>
+</h3>
 </body>
 </html>
 

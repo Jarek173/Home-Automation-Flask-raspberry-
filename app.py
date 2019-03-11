@@ -1,5 +1,5 @@
 import RPi.GPIO as GPIO
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import function
 import time
 app = Flask(__name__)
@@ -8,10 +8,9 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(14, GPIO.OUT)
 
-ledYellow = GPIO.PWM(14, 50)
-wypelnienie = 50
-ledYellow.start(wypelnienie)
-
+ledYellow = GPIO.PWM(14, 2000)
+ledYellow.start(0)
+value = 0;
 ledRed = 26
 ledRedSts = 0;
 relay = 19;
@@ -21,24 +20,24 @@ stat = "out"
 function.setPin(ledRed, stat)
 function.setPin(relay, stat)    
 
-
-if wypelnienie > 100:
-    wypelnienie = 0
-ledYellow.ChangeDutyCycle(wypelnienie) 
+ 
 
 
 @app.route('/')
 def index():    
     ledREDSts = GPIO.input(ledRed)
     relaySts = GPIO.input(relay)
-    templateData = { 'ledRed' : ledRedSts, 'relay' : relaySts}
+    templateData = { 'ledRed' : ledRedSts, 'relay' : relaySts, "submitValue" : value}
     return render_template('index.html', **templateData)
 
 @app.route("/getValue", methods=["POST"])
 def getValue():
-    slider = request.form
-    print(slider)
-    return slider;
+    slider = request.form["slider"]
+    value = float(slider)
+    print(value)
+    ledYellow.ChangeDutyCycle(value)
+    templateData = { 'ledRed' : ledRedSts, 'relay' : relaySts, "submitValue" : value}
+    return render_template('index.html', **templateData)
     
 @app.route('/<deviceName>/<action>')
 def do(deviceName, action):
@@ -53,7 +52,7 @@ def do(deviceName, action):
     
     ledRedSts = GPIO.input(ledRed)
     relaySts = GPIO.input(relay)
-    templateData = { 'ledRed' : ledRedSts, 'relay' : relaySts }
+    templateData = { 'ledRed' : ledRedSts, 'relay' : relaySts, "submitValue" : value }
     return render_template('index.html', **templateData )
 
 if __name__ == '__main__':    
