@@ -5,23 +5,20 @@
 </head>
 <body>
 	
-<h1>Actuators</h1><br>
-<h2>Status</h2>
-
-<h3> RED LED --> {{ledRed}} </h3>
-<h3> RED LED CNTRL ==> <a href = "/ledRed/on" class="button">TURN ON</a>
+<h1> Status Diody Czerwonej --> {{ledRed}} </h1>
+<h1> Przyciski Diody Czerwonej ==> <a href = "/ledRed/on" class="button">TURN ON</a>
 <a href="/ledRed/off" class = "button">TURN OFF</a></h3>
-<h3> RELAY --> {{relay}}</h3>
-<h3> RELAY CNTRL ==><a href = "/relay/on" class = "button">TURN ON</a>
-<a href="/relay/off" class = "button">TURN OFF</a></h3>
+<h1> Status Przekaźnika(Załączany stanem niskim) --> {{relay}}</h1>
+<h1> Przyciski Przekaźnika ==><a href = "/relay/on" class = "button">TURN ON</a>
+<a href="/relay/off" class = "button">TURN OFF</a></h1>
 
-<h3>Sterowanie wypelnieniem:</h3>
-  <h3><form method = "POST" action = "/getValue"> 
+<h1>Sterowanie wypelnieniem:</h1>
+  <h1><form method = "POST" action = "/getValue"> 
       <input type="range" min="0" max="100" name = "slider" />
       <input type="submit" value="submit" />
       Aktualna Wartość -->{{submitValue}} 
   </form>
-</h3>
+</h1>
 </body>
 </html>
 

@@ -7,9 +7,4 @@ def setPin(pin, pinStatus):
     if pinStatus == "in":
         GPIO.setup(pin, GPIO.IN)
         
-def mq7(pin):
-    GPIO.setup(pin, GPIO.IN)
-    if GPIO.input(pin):
-        return 0
-    if GPIO.input(pin)!=1:
-        return 1
+
