@@ -1,8 +1,7 @@
 import spidev
 from numpy import interp
 import RPi.GPIO as GPIO
-from time import sleep
-Doutput = 0;
+output = 0;
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
@@ -27,9 +26,8 @@ def mq7AnalogInput(channel):
     data = ((adc[1]&3) <<8) + adc[2]
     return data
 
-def Main():
-    while True:
-        output = mq7AnalogInput(0) 
-        #output = interp(output, [0, 1023], [0, 100])
-        Doutput = mq7DigitalInput(2)
-        sleep(1)
+def main():
+    global output 
+    output = mq7AnalogInput(0) 
+    output = interp(output, [0, 1023], [0, 1000])
+    Doutput = mq7DigitalInput(2)
